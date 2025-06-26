@@ -1,30 +1,30 @@
-# Travel Bucket List MERN App Requirements
+# # Travel Bucket List MERN App Requirements
 
-# --- Backend (Node.js/Express/MongoDB) ---
-# Install dependencies:
-cd server
-npm install
+# # --- Backend (Node.js/Express/MongoDB) ---
+# # Install dependencies:
+# cd server
+# npm install
 
-# Start backend server:
-node index.js
+# # Start backend server:
+# node index.js
 
-# --- Frontend (React/Vite) ---
-# Install dependencies:
-npm install
+# # --- Frontend (React/Vite) ---
+# # Install dependencies:
+# npm install
 
-# Start frontend dev server:
-npm run dev
+# # Start frontend dev server:
+# npm run dev
 
-# --- MongoDB ---
-# Make sure MongoDB is running locally or update the MONGO_URI in server/.env for Atlas
+# # --- MongoDB ---
+# # Make sure MongoDB is running locally or update the MONGO_URI in server/.env for Atlas
 
-# --- Environment Variables ---
-# Create a .env file in the server directory with:
-# MONGO_URI=mongodb://localhost:27017/travelbucket
-# JWT_SECRET=your_jwt_secret
-# PORT=5000
+# # --- Environment Variables ---
+# # Create a .env file in the server directory with:
+# # MONGO_URI=mongodb://localhost:27017/travelbucket
+# # JWT_SECRET=your_jwt_secret
+# # PORT=5000
 
-# --- Notes ---
-# - The frontend runs on http://localhost:5173 by default
-# - The backend runs on http://localhost:5000 by default
-# - API requests are proxied from frontend to backend via vite.config.js 
+# # --- Notes ---
+# # - The frontend runs on http://localhost:5173 by default
+# # - The backend runs on http://localhost:5000 by default
+# # - API requests are proxied from frontend to backend via vite.config.js 
