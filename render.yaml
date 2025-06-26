@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: travel-backend
+    env: node
+    rootDir: server
+    buildCommand: ''
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://raviprasanth9786:xwNPv9nuthmv484g@cluster0.lef1s9f.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 
