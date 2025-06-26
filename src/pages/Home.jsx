@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiCall } from '../config';
 import './Home.css';
 
 const Home = ({ setAuth }) => {
@@ -19,11 +20,9 @@ const Home = ({ setAuth }) => {
 
   const fetchPlaces = async () => {
     try {
-      const res = await fetch('/api/places', {
+      const data = await apiCall('/api/places', {
         headers: { 'Authorization': localStorage.getItem('token') }
       });
-      if (!res.ok) throw new Error('Failed to fetch places');
-      const data = await res.json();
       setPlaces(data);
     } catch (err) {
       console.error('Error fetching places:', err);
@@ -68,10 +67,9 @@ const Home = ({ setAuth }) => {
     }
 
     try {
-      const res = await fetch('/api/places', {
+      const addedPlace = await apiCall('/api/places', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': localStorage.getItem('token')
         },
         body: JSON.stringify({
@@ -80,10 +78,7 @@ const Home = ({ setAuth }) => {
           photo: photoUrl
         })
       });
-
-      if (!res.ok) throw new Error('Failed to add place');
       
-      const addedPlace = await res.json();
       setPlaces([...places, addedPlace]);
       setNewPlace({ place: '', description: '', photo: '' });
       setSelectedFile(null);
@@ -100,12 +95,10 @@ const Home = ({ setAuth }) => {
     if (!placeId || !places.find(p => p._id === placeId)?.userAdded) return;
     
     try {
-      const res = await fetch(`/api/places/${placeId}`, {
+      await apiCall(`/api/places/${placeId}`, {
         method: 'DELETE',
         headers: { 'Authorization': localStorage.getItem('token') }
       });
-      
-      if (!res.ok) throw new Error('Failed to delete place');
       
       setPlaces(places.filter(p => p._id !== placeId));
     } catch (err) {

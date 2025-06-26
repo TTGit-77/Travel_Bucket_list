@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { apiCall } from '../config';
 import './Auth.css';
 
 const Login = ({ setAuth }) => {
@@ -12,13 +13,10 @@ const Login = ({ setAuth }) => {
     e.preventDefault();
     setError('');
     try {
-      const res = await fetch('/api/auth/login', {
+      const data = await apiCall('/api/auth/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Login failed');
       localStorage.setItem('token', data.token);
       localStorage.setItem('username', data.username);
       setAuth(true);

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { apiCall } from '../config';
 import './Auth.css';
 
 const Signup = () => {
@@ -15,13 +16,10 @@ const Signup = () => {
     setError('');
     setSuccess('');
     try {
-      const res = await fetch('/api/auth/signup', {
+      await apiCall('/api/auth/signup', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password })
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Signup failed');
       setSuccess('Signup successful! Please login.');
       setTimeout(() => navigate('/login'), 1500);
     } catch (err) {

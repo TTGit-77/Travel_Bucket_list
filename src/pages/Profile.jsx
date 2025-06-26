@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { apiCall } from '../config';
 import './Profile.css';
 
 const Profile = () => {
@@ -17,11 +18,9 @@ const Profile = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('/api/bucketlist', {
+      const data = await apiCall('/api/bucketlist', {
         headers: { 'Authorization': localStorage.getItem('token') }
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Failed to fetch bucket list');
       setBucketList(data);
     } catch (err) {
       setError(err.message);
@@ -35,16 +34,13 @@ const Profile = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      const res = await fetch(`/api/bucketlist/${id}`, {
+      const data = await apiCall(`/api/bucketlist/${id}`, {
         method: 'PATCH',
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': localStorage.getItem('token')
         },
         body: JSON.stringify({ status })
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Failed to update status');
       setBucketList(data);
     } catch (err) {
       setError(err.message);
@@ -54,16 +50,13 @@ const Profile = () => {
   const addMilestone = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('/api/bucketlist', {
+      const data = await apiCall('/api/bucketlist', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': localStorage.getItem('token')
         },
         body: JSON.stringify(newMilestone)
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Failed to add milestone');
       setBucketList(data);
       setNewMilestone({ place: '', description: '', plannedDate: '' });
       setShowAddForm(false);
